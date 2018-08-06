@@ -61,7 +61,6 @@
 # Basic Setup and Configuration
 
 ## Installing Ansible
-------------------
 
 > To begin exploring Ansible as a means of managing our various servers,
 > we need to install the Ansible software on at least one machine. 
@@ -365,7 +364,7 @@
 > concept of desired state like a typical Ansible module.
 >
 
-## Use roles to group related tasks
+### Use roles to group related tasks
 
 > In Ansible, roles allow you to group related tasks and all their
 > variables and dependencies into a single, self-contained, portable
@@ -374,7 +373,7 @@
 > organizing things into roles let you reuse common configuration steps
 > between different types of servers.
 >
-### 1.  Requirements for using role?
+####   Requirements for using role?
 
 > Roles provide a standardized file-and-directory structure that lets
 > Ansible automatically load variables, tasks, handlers, and default
@@ -382,9 +381,9 @@
 >
 > Per the Ansible roles documentation, a role must contain:
 
-### 2.  at least one of the following directories below.
+##### 1.  at least one of the following directories below.
 
-### 3.  each directory used must contain a main.yml file that contains the
+##### 2.  each directory used must contain a main.yml file that contains the
     relevant content for that directory.
 
     -   **Tasks:** The main list of tasks to be executed by the role.

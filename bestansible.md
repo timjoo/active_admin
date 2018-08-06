@@ -450,8 +450,8 @@ Directory Layout
 > Below is the top level of the directory would contain files and
 > directories like so:
 >
-     production # inventory file for production servers
-     staging # inventory file for staging environment
+     production/ # inventory file for production servers
+     staging/ # inventory file for staging environment
 >
      group_vars/ # here we assign variables to particular groups
      host_vars/ # here we assign variables to particular systems
@@ -459,17 +459,17 @@ Directory Layout
      module_utils/ # if any custom module_utils to support modules, put them here (optional)
      filter_plugins/ # if any custom filter plugins, put them here (optional)
      roles/
-     common/ # this hierarchy represents a "role"
-     tasks/
-     handlers/ # handlers file
-     templates/ # files for use with the template resource ntp.conf.j2 # templates end in .j2
-     files/ # files for use with the copy resource
-     vars/ # variables associated with this role
-     defaults/  # default lower priority variables for this role
-     meta/  # role dependencies
-     library/ # roles can also include custom modules
-     module_utils/ # roles can also include custom module_utils
-     lookup_plugins/ # or other types of plugins, like lookup in this case
+       common/ # this hierarchy represents a "role"
+       tasks/
+       handlers/ # handlers file
+       templates/ # files for use with the template resource ntp.conf.j2 # templates end in .j2
+       files/ # files for use with the copy resource
+       vars/ # variables associated with this role
+       defaults/  # default lower priority variables for this role
+       meta/  # role dependencies
+       library/ # roles can also include custom modules
+       module_utils/ # roles can also include custom module_utils
+       lookup_plugins/ # or other types of plugins, like lookup in this case
      webtier/ # same kind of structure as "common" was above, done for the webtier role
      monitoring/
 >

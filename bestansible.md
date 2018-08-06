@@ -229,14 +229,14 @@
 >
 ##### YAML
      - hosts: web
-     tasks:
-      - yum:
-      name: httpd
-      state: latest
-      - service:
-      name: httpd
-      state: started
-      enabled: yes
+       tasks:
+        - yum:
+          name: httpd
+          state: latest
+        - service:
+          name: httpd
+          state: started
+          enabled: yes
       PLAY [web]
       ******************************************************
       TASK [setup]
@@ -256,17 +256,17 @@
 >
 #####  YAML
      - hosts: web
-     name: installs and starts apache
-     tasks:
-     - name: install apache packages
-     yum:
-     name: httpd
-     state: latest
-     - name: starts apache service
-     service:
-     name: httpd
-     state: started
-     enabled: yes
+       name: installs and starts apache
+       tasks:
+       - name: install apache packages
+         yum:
+           name: httpd
+           state: latest
+       - name: starts apache service
+         service:
+           name: httpd
+           state: started
+           enabled: yes
      PLAY [install and starts apache]
      ***********************************
     
@@ -375,58 +375,58 @@
      ---
      - hosts: all
      vars:
-     remote_user: user
-     become: yes
+       remote_user: user
+       become: yes
      tasks:
      - name: Install ntp
-     yum: name=ntp state=present
-     tags: ntp
+       yum: name=ntp state=present
+         tags: ntp
      - name: Configure ntp file
-     template: src=ntp.conf.j2 dest=/etc/ntp.conf
-     tags: ntp
-     notify: restart ntp
+       template: src=ntp.conf.j2 dest=/etc/ntp.conf
+         tags: ntp
+         notify: restart ntp
      - name: Start the ntp service
-     service: name=ntpd state=started enabled=yes
-     tags: ntp
+       service: name=ntpd state=started enabled=yes
+         tags: ntp
      - name: test to see if selinux is running
-     command: getenforce
-     register: sestatus
-     changed\_when: false
+       command: getenforce
+          register: sestatus
+          changed\_when: false
      - hosts: database
      vars:
-     mysql_port: 3306
-     dbname: somedb
-     dbuser: someuser
-     dbpass: somepass
-     remote_user: user
-     become: yes
+       mysql_port: 3306
+       dbname: somedb
+       dbuser: someuser
+       dbpass: somepass
+       remote_user: user
+       become: yes
      tasks:
      - name: Install Mysql package
-     yum: name={{ item }} state=installed
-     with_items:
-     - mysql-server
-     - MySQL-python
-     - libselinux-python
-     - libsemanage-python
+       yum: name={{ item }} state=installed
+         with_items:
+             - mysql-server
+             - MySQL-python
+             - libselinux-python
+             - libsemanage-python
      - name: Configure SELinux to start mysql on any port
-     seboolean: name=mysql\_connect\_any state=true persistent=yes
-     when: sestatus.rc != 0
+       seboolean: name=mysql\_connect\_any state=true persistent=yes
+         when: sestatus.rc != 0
      - name: Create Mysql configuration file
-     template: src=my.cnf.j2 dest=/etc/my.cnf
-     notify:
-     - restart mysql
+       template: src=my.cnf.j2 dest=/etc/my.cnf
+         notify:
+           - restart mysql
      - name: Start Mysql Service
-     service: name=mysqld state=started enabled=yes
+       service: name=mysqld state=started enabled=yes
      - name: insert iptables rule
-     lineinfile: dest=/etc/sysconfig/iptables state=present regexp="{{
-     mysql_port }}" insertafter="^:OUTPUT " line="-A INPUT -p tcp
-     --dport {{ mysql_port }} -j ACCEPT"
-     notify: restart iptables
+       lineinfile: dest=/etc/sysconfig/iptables state=present regexp="{{
+       mysql_port }}" insertafter="^:OUTPUT " line="-A INPUT -p tcp
+       --dport {{ mysql_port }} -j ACCEPT"
+           notify: restart iptables
      - name: Create Application Database
-     mysql_db: name={{ dbname }} state=present
+         mysql_db: name={{ dbname }} state=present
      - name: Create Application DB User
-     mysql_user: name={{ dbuser }} password={{ dbpass }} priv=*.*:ALL
-     host='%' state=present
+         mysql_user: name={{ dbuser }} password={{ dbpass }} priv=*.*:ALL
+         host='%' state=present
 #####     Using roles:
      # site.yml
      ---
@@ -453,125 +453,71 @@ Directory Layout
 > Below is the top level of the directory would contain files and
 > directories like so:
 >
-> production \# inventory file for production servers
+     production # inventory file for production servers
+     staging # inventory file for staging environment
 >
-> staging \# inventory file for staging environment
->
-> group\_vars/ \# here we assign variables to particular groups
->
-> host\_vars/ \# here we assign variables to particular systems
->
-> library/ \# if any custom modules, put them here (optional)
->
-> module\_utils/ \# if any custom module\_utils to support modules, put
-> them here (optional)
->
-> filter\_plugins/ \# if any custom filter plugins, put them here
-> (optional)
->
-> roles/
->
-> common/ \# this hierarchy represents a \"role\"
->
-> tasks/
->
-> main.yml \# tasks file can include smaller files if warranted
->
-> handlers/
->
-> main.yml \# handlers file
->
-> templates/ \# files for use with the template resource
->
-> ntp.conf.j2 \# templates end in .j2
->
-> files/
->
-> bar.txt \# files for use with the copy resource
->
-> foo.sh \# script files for use with the script resource
->
-> vars/
->
-> main.yml \# variables associated with this role
->
-> defaults/
->
-> main.yml \# default lower priority variables for this role
->
-> meta/
->
-> main.yml \# role dependencies
->
-> library/ \# roles can also include custom modules
->
-> module\_utils/ \# roles can also include custom module\_utils
->
-> lookup\_plugins/ \# or other types of plugins, like lookup in this
-> case
->
-> webtier/ \# same kind of structure as \"common\" was above, done for
-> the webtier role
->
-> monitoring/
+     group_vars/ # here we assign variables to particular groups
+     host_vars/ # here we assign variables to particular systems
+     library/ # if any custom modules, put them here (optional)
+     module_utils/ # if any custom module_utils to support modules, put
+     them here (optional)
+     filter_plugins/ # if any custom filter plugins, put them here
+     (optional)
+     roles/
+     common/ # this hierarchy represents a "role"
+     tasks/
+     main.yml # tasks file can include smaller files if warranted
+     handlers/
+     main.yml # handlers file
+     templates/ # files for use with the template resource
+     ntp.conf.j2 # templates end in .j2
+     files/
+     bar.txt # files for use with the copy resource
+     foo.sh # script files for use with the script resource
+     vars/
+     main.yml # variables associated with this role
+     defaults/
+     main.yml # default lower priority variables for this role
+     meta/
+     main.yml # role dependencies
+     library/ # roles can also include custom modules
+     module_utils/ # roles can also include custom module_utils
+     lookup_plugins/ # or other types of plugins, like lookup in this
+     case
+     webtier/ # same kind of structure as "common" was above, done for
+     the webtier role
+     monitoring/
 >
 > Script below will create the directory structure above.
 >
-> \#!/bin/sh
+     #!/bin/sh
+     touch production staging
+     mkdir group_vars
+     touch group_vars/group1
+     touch group_vars/group2
+     mkdir host_vars
+     touch host_vars/hostname1
+     touch host_vars/hostname2
+     mkdir library
+     touch library/.keep
+     mkdir filter_plugins
+     touch filter_plugins/.keep
+     touch site.yml
+     touch webservers.yml
+     touch dbservers.yml
+     mkdir -p roles/{common,webtier,monitoring,fooapps}
+     mkdir -p
+     roles/common/{tasks,handlers,templates,files,vars,defaults,meta}
+     touch roles/common/tasks/main.yml
+     touch roles/common/handlers/main.yml
+     touch roles/common/templates/ntp.conf.j2
+     touch roles/common/files/bar.txt
+     touch roles/common/files/foo.sh
+     touch roles/common/vars/main.yml
+     touch roles/common/defaults/main.yml
+     touch roles/common/meta/main.yml
+     touch roles/webtier/.keep
+     touch roles/monitoring/.keep
+     touch roles/monitoring/.keep
+     touch roles/fooapps/.keep
 >
-> touch production staging
->
-> mkdir group\_vars
->
-> touch group\_vars/group1
->
-> touch group\_vars/group2
->
-> mkdir host\_vars
->
-> touch host\_vars/hostname1
->
-> touch host\_vars/hostname2
->
-> mkdir library
->
-> touch library/.keep
->
-> mkdir filter\_plugins
->
-> touch filter\_plugins/.keep
->
-> touch site.yml
->
-> touch webservers.yml
->
-> touch dbservers.yml
->
-> mkdir -p roles/{common,webtier,monitoring,fooapps}
->
-> mkdir -p
-> roles/common/{tasks,handlers,templates,files,vars,defaults,meta}
->
-> touch roles/common/tasks/main.yml
->
-> touch roles/common/handlers/main.yml
->
-> touch roles/common/templates/ntp.conf.j2
->
-> touch roles/common/files/bar.txt
->
-> touch roles/common/files/foo.sh
->
-> touch roles/common/vars/main.yml
->
-> touch roles/common/defaults/main.yml
->
-> touch roles/common/meta/main.yml
->
-> touch roles/webtier/.keep
->
-> touch roles/monitoring/.keep
->
-> touch roles/monitoring/.keep
->
-> touch roles/fooapps/.keep

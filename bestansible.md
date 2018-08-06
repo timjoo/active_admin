@@ -416,7 +416,7 @@
 > common nodes are each defined in separate, portable, reusable roles
 > instead of being defined in the playbook itself.
 >
-> #### You could go from this using playbook:
+##### You could go from this using playbook:
 
  \# site.yml
 

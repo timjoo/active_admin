@@ -235,6 +235,7 @@
           name: httpd
           state: started
           enabled: yes
+##### output:
 
       PLAY [web]
       ******************************************************
@@ -266,6 +267,8 @@
            name: httpd
            state: started
            enabled: yes
+
+##### output:
 
      PLAY [install and starts apache]
      ***********************************

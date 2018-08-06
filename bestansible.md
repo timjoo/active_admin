@@ -122,19 +122,13 @@
 > Now you can test the connectivity:
 >
      root@master:~# ansible all -m ping
->
      host1.dev | success >> {
->
      "changed": false,
->
      "ping": "pong"
->
       }
->
+
      host2.dev | success >> {
->
       "changed": false,
->
      "ping": "pong".
 
 ## Version Control:
@@ -179,14 +173,12 @@
 > In any shell, vi /etc/ansible/ansible.cfg and uncomment the follow
 > arguments and change the value.
 >
-     [ssh_connection]
+>    [ssh_connection]
 >
-     # Enable SSH multiplexing to increase performance
+>     # Enable SSH multiplexing to increase performance
 >
      pipelining = True
->
      retry_files_save_path=~/.retry_files
->
      retry_files_enabled=false
 >
 > If you are annoyed by \*.retry files being created next to playbooks

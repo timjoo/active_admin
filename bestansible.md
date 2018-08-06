@@ -1,7 +1,7 @@
-1.  Introduction:
-    =============
+Introduction:
+=============
 
-    1.  []{#_Toc520890483 .anchor}Purpose and scope:
+    Purpose and scope:
 
 > As for most Best Practice guides, this document also is created to be
 > a guide for the team members to have a set of standards to be used
@@ -13,7 +13,7 @@
 What is Ansible:
 ----------------
 
-> []{#_Toc520890485 .anchor}Ansible is a radically simple IT automation
+> Ansible is a radically simple IT automation
 > engine that automates cloud provisioning, configuration
 > management, application deployment, intra-service orchestration, and
 > many other IT needs.
@@ -27,44 +27,44 @@ What is Ansible:
 > language (YAML, in the form of Ansible Playbooks) that allow you to
 > describe your automation jobs in a way that approaches plain English.
 
-While there are many popular configuration management systems available
-for Linux systems, such as Chef and Puppet, these are often more complex
-than many people want or need.  Ansible is a great alternative to these
-options because it has a much smaller overhead to get started.
+>While there are many popular configuration management systems available
+>for Linux systems, such as Chef and Puppet, these are often more complex
+>than many people want or need.  Ansible is a great alternative to these
+>options because it has a much smaller overhead to get started.
 
-Ansible works by configuring client machines from a computer with
-Ansible components installed and configured. It communicates over normal
-SSH channels in order to retrieve information from remote machines,
-issue commands, and copy files. Because of this, an Ansible system does
-not require any additional software to be installed on the client
-computers. This is one way that Ansible simplifies the administration of
-servers. Any server that has an SSH port exposed can be brought under
-Ansible\'s configuration umbrella, regardless of what stage it is at in
-its life cycle.
+>Ansible works by configuring client machines from a computer with
+>Ansible components installed and configured. It communicates over normal
+>SSH channels in order to retrieve information from remote machines,
+>issue commands, and copy files. Because of this, an Ansible system does
+>not require any additional software to be installed on the client
+>computers. This is one way that Ansible simplifies the administration of
+>servers. Any server that has an SSH port exposed can be brought under
+>Ansible\'s configuration umbrella, regardless of what stage it is at in
+>its life cycle.
 
-Ansible takes on a modular approach, making it easy to extend to use the
-functionalities of the main system to deal with specific scenarios.
-Modules can be written in any language and communicate in standard JSON.
-Configuration files are mainly written in the YAML data serialization
-format due to its expressive nature and its similarity to popular markup
-languages. Ansible can interact with clients through either command line
-tools or through its configuration scripts called Playbooks.
+>Ansible takes on a modular approach, making it easy to extend to use the
+>functionalities of the main system to deal with specific scenarios.
+>Modules can be written in any language and communicate in standard JSON.
+>Configuration files are mainly written in the YAML data serialization
+>format due to its expressive nature and its similarity to popular markup
+>languages. Ansible can interact with clients through either command line
+>tools or through its configuration scripts called Playbooks.
 
-1.  Assumptions:
-    ------------
+Assumptions:
+------------
 
     This document was created with a few assumptions.
 
 <!-- -->
 
-1.  Centos 7
+	1.  Centos 7
 
-2.  Python 2.7.5
+	2.  Python 2.7.5
 
-3.  ssh enabled
+	3.  ssh enabled
 
 Basic Setup and Configuration
-=============================
+==============================
 
 Installing Ansible
 ------------------
@@ -214,8 +214,8 @@ Ansible Configuration
 1.  Best Practices:
     ===============
 
-    1.  Comments
-        --------
+Comments
+--------
 
 > You should start every script with some comments explaining the
 > purpose of the script. Comments will make the intent of the script
@@ -389,7 +389,7 @@ Use roles to group related tasks
 > organizing things into roles let you reuse common configuration steps
 > between different types of servers.
 >
-1.  []{#_Toc520890503 .anchor}Requirements for using role?
+1.  Requirements for using role?
 
 > Roles provide a standardized file-and-directory structure that lets
 > Ansible automatically load variables, tasks, handlers, and default
@@ -397,9 +397,9 @@ Use roles to group related tasks
 >
 > Per the Ansible roles documentation, a role must contain:
 
-1.  at least one of the following directories below.
+2.  at least one of the following directories below.
 
-2.  each directory used must contain a main.yml file that contains the
+3.  each directory used must contain a main.yml file that contains the
     relevant content for that directory.
 
     -   **Tasks:** The main list of tasks to be executed by the role.

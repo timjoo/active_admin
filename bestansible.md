@@ -174,18 +174,17 @@
 > arguments and change the value.
 >
 >    [ssh_connection]
->
->     # Enable SSH multiplexing to increase performance
+>    # Enable SSH multiplexing to increase performance
 >
      pipelining = True
-     retry_files_save_path=~/.retry_files
-     retry_files_enabled=false
->
 > If you are annoyed by \*.retry files being created next to playbooks
 > which hinders filename tab completion, an environment variable
 > RETRY\_FILES\_SAVE\_PATH lets you put them in a different place or you
 > can disable it from creating retry files by
 > RETRY\_FILES\_ENABLED=false.
+     retry_files_save_path=~/.retry_files
+     retry_files_enabled=false
+>
 
 # Best Practices:
 

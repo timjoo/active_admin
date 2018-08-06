@@ -240,92 +240,72 @@
 > better communicates the steps of actions when running a play. Consider
 > this example play and its standard Ansible output.
 >
-> YAML
+##### YAML
+     - hosts: web
+     tasks:
 >
-> \- hosts: web
+      \- yum:
 >
-> tasks:
+      name: httpd
 >
-> \- yum:
+      state: latest
 >
-> name: httpd
+      \- service:
 >
-> state: latest
+      name: httpd
 >
-> \- service:
+      state: started
 >
-> name: httpd
+      enabled: yes
 >
-> state: started
+      PLAY \[web\]
+      \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
 >
-> enabled: yes
+      TASK \[setup\]
+      \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
 >
-> PLAY \[web\]
+      ok: \[web1\]
+>
+      TASK \[yum\]
 > \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
 >
-> TASK \[setup\]
-> \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
+      ok: \[web1\]
 >
-> ok: \[web1\]
->
-> TASK \[yum\]
-> \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
->
-> ok: \[web1\]
->
-> TASK \[service\]
+      TASK \[service\]
 > \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
 >
-> ok: \[web1\]
+      ok: \[web1\]
 >
-> The play above was successful, but it is difficult to understand the
-> actions of each tasks. You can guess what each of the tasks were or
-> the purpose of the play, but a good descriptive "name" can make the
-> task much clearer.
+#####  The play above was successful, but it is difficult to understand the
+ actions of each tasks. You can guess what each of the tasks were or
+ the purpose of the play, but a good descriptive "name" can make the
+ task much clearer.
 >
-> YAML
->
-> \- hosts: web
->
-> name: installs and starts apache
->
-> tasks:
->
-> \- name: install apache packages
->
-> yum:
->
-> name: httpd
->
-> state: latest
->
-> \- name: starts apache service
->
-> service:
->
-> name: httpd
->
-> state: started
->
-> enabled: yes
->
-> PLAY \[install and starts apache\]
-> \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
->
-> TASK \[setup\]
-> \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
->
-> ok: \[web1\]
->
-> TASK \[install apache packages\]
-> \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
->
-> ok: \[web1\]
->
-> TASK \[starts apache service\]
-> \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
->
-> ok: \[web1\]
+#####  YAML
+     - hosts: web
+     name: installs and starts apache
+     tasks:
+     - name: install apache packages
+     yum:
+     name: httpd
+     state: latest
+     - name: starts apache service
+     service:
+     name: httpd
+     state: started
+     enabled: yes
+     PLAY [install and starts apache]
+     ***********************************
+    
+     TASK [setup]
+     *******************************************************
+     ok: [web1]
+     TASK [install apache packages]
+     *************************************
+     ok: [web1]
+     TASK [starts apache service]
+     ***************************************
+     ok: [web1]
 >
 > A good "name" can reduce the confusion and aid the usage of
 > the \--list-tasks switch in ansible-playbook.
@@ -418,79 +398,79 @@
 >
 ##### You could go from this using playbook:
 
-     \# site.yml
-     \-\--
-     \- hosts: all
+     # site.yml
+     ---
+     - hosts: all
      vars:
-     remote\_user: user
+     remote_user: user
      become: yes
      tasks:
-     \- name: Install ntp
+     - name: Install ntp
      yum: name=ntp state=present
      tags: ntp
-     \- name: Configure ntp file
+     - name: Configure ntp file
      template: src=ntp.conf.j2 dest=/etc/ntp.conf
      tags: ntp
      notify: restart ntp
-     \- name: Start the ntp service
+     - name: Start the ntp service
      service: name=ntpd state=started enabled=yes
      tags: ntp
-     \- name: test to see if selinux is running
+     - name: test to see if selinux is running
      command: getenforce
      register: sestatus
      changed\_when: false
-     \- hosts: database
+     - hosts: database
      vars:
-     mysql\_port: 3306
+     mysql_port: 3306
      dbname: somedb
      dbuser: someuser
      dbpass: somepass
-     remote\_user: user
+     remote_user: user
      become: yes
      tasks:
-     \- name: Install Mysql package
+     - name: Install Mysql package
      yum: name={{ item }} state=installed
-     with\_items:
-     \- mysql-server
-     \- MySQL-python
-     \- libselinux-python
-     \- libsemanage-python
-     \- name: Configure SELinux to start mysql on any port
+     with_items:
+     - mysql-server
+     - MySQL-python
+     - libselinux-python
+     - libsemanage-python
+     - name: Configure SELinux to start mysql on any port
      seboolean: name=mysql\_connect\_any state=true persistent=yes
      when: sestatus.rc != 0
-     \- name: Create Mysql configuration file
+     - name: Create Mysql configuration file
      template: src=my.cnf.j2 dest=/etc/my.cnf
      notify:
-     \- restart mysql
-     \- name: Start Mysql Service
+     - restart mysql
+     - name: Start Mysql Service
      service: name=mysqld state=started enabled=yes
-     \- name: insert iptables rule
-     lineinfile: dest=/etc/sysconfig/iptables state=present regexp=\"{{
-     mysql\_port }}\" insertafter=\"\^:OUTPUT \" line=\"-A INPUT -p tcp
-     \--dport {{ mysql\_port }} -j ACCEPT\"
+     - name: insert iptables rule
+     lineinfile: dest=/etc/sysconfig/iptables state=present regexp="{{
+     mysql_port }}" insertafter="^:OUTPUT " line="-A INPUT -p tcp
+     --dport {{ mysql_port }} -j ACCEPT"
      notify: restart iptables
-     \- name: Create Application Database
-     mysql\_db: name={{ dbname }} state=present
-     \- name: Create Application DB User
-     mysql\_user: name={{ dbuser }} password={{ dbpass }} priv=\*.\*:ALL
-     host=\'%\' state=present
+     - name: Create Application Database
+     mysql_db: name={{ dbname }} state=present
+     - name: Create Application DB User
+     mysql_user: name={{ dbuser }} password={{ dbpass }} priv=*.*:ALL
+     host='%' state=present
 #####     Using roles:
-     \# site.yml
-     \-\--
-     \# This playbook deploys the whole application stack in this site.
-     \- name: apply common configuration to all nodes
+     # site.yml
+     ---
+     # This playbook deploys the whole application stack in this site.
+     - name: apply common configuration to all nodes
      hosts: all
-     remote\_user: user
+     remote_user: user
      roles:
-     \- common
-     \- name: configure and deploy the webservers and application code
+     - common
+     - name: configure and deploy the webservers and application code
      hosts: webservers
-     remote\_user: user
+     remote_user: user
      roles:
-     \- web
-     \- name: deploy MySQL and configure the databases
+     - web
+     - name: deploy MySQL and configure the databases
      hosts: dbservers
-     remote\_user: user
+     remote_user: user
      roles:
      -db
 

@@ -1,7 +1,8 @@
 Introduction:
 =============
 
-    Purpose and scope:
+Purpose and scope:
+------------------
 
 > As for most Best Practice guides, this document also is created to be
 > a guide for the team members to have a set of standards to be used
@@ -211,8 +212,8 @@ Ansible Configuration
 > can disable it from creating retry files by
 > RETRY\_FILES\_ENABLED=false.
 
-1.  Best Practices:
-    ===============
+Best Practices:
+===============
 
 Comments
 --------

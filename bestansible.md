@@ -1,7 +1,6 @@
 # Introduction:
 
-Purpose and scope:
-------------------
+## Purpose and scope:
 
 > As for most Best Practice guides, this document also is created to be
 > a guide for the team members to have a set of standards to be used
@@ -10,8 +9,7 @@ Purpose and scope:
 > in our project. This document will state a basic directory structure
 > of Ansible and a basic Ansible installation and usage.
 >
-What is Ansible:
-----------------
+## What is Ansible:
 
 > Ansible is a radically simple IT automation
 > engine that automates cloud provisioning, configuration
@@ -50,15 +48,14 @@ What is Ansible:
 >languages. Ansible can interact with clients through either command line
 >tools or through its configuration scripts called Playbooks.
 
-Assumptions:
-------------
+## Assumptions:
 
 >    This document was created with a few assumptions.
-
+>
 >	1.  Centos 7
-
+>
 >	2.  Python 2.7.5
-
+>
 >	3.  ssh enabled
 
 Basic Setup and Configuration

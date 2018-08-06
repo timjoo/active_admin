@@ -68,11 +68,11 @@
 > To get Ansible for CentOS 7, first ensure that the CentOS 7 EPEL
 > repository is installed:
 >
-> \$sudo yum install epel-release
+    $sudo yum install epel-release
 >
 > Once the repository is installed, install Ansible with yum:
 >
-> \$sudo yum install ansible
+    $sudo yum install ansible
 >
 > We now have all of the software required to administer our servers
 > through Ansible.
@@ -85,7 +85,7 @@
 >
 > Open the file with root privileges like this:
 >
-> \$sudo vi /etc/ansible/hosts
+     $sudo vi /etc/ansible/hosts
 >
 > You will see a file that has a lot of example configurations commented
 > out. Keep these examples in the file to help you learn Ansible\'s
@@ -102,9 +102,8 @@
 > hostnames host1.dev and host2.dev. Your /etc/ansible/hosts file would
 > look like this:
 >
-> host1.dev
->
-> host2.dev
+    host1.dev
+    host2.dev
 >
 > You want to be able to connect to your servers without having to enter
 > a password every time. If you don\'t already have ssh key
@@ -113,31 +112,30 @@
 >
 > Generate the ssh key on the master node:
 >
-> root@master:\~\# ssh-keygen -t rsa -C \"name@example.org\"
+     root@master:~# ssh-keygen -t rsa -C "name@example.org"
 >
 > Then copy your public key to the servers with ssh-copy-id:
 >
-> root@master:\~\# ssh-copy-id user@host1.dev
->
-> root@master:\~\# ssh-copy-id user@host2.dev
+     root@master:~# ssh-copy-id user@host1.dev
+     root@master:~# ssh-copy-id user@host2.dev
 >
 > Now you can test the connectivity:
 >
-> root@master:\~\# ansible all -m ping
+     root@master:~# ansible all -m ping
 >
-> host1.dev \| success \>\> {
+     host1.dev | success >> {
 >
-> \"changed\": false,
+     "changed": false,
 >
-> \"ping\": \"pong\"
+     "ping": "pong"
 >
-> }
+      }
 >
-> host2.dev \| success \>\> {
+     host2.dev | success >> {
 >
-> \"changed\": false,
+      "changed": false,
 >
-> \"ping\": \"pong\".
+     "ping": "pong".
 
 ## Version Control:
 
@@ -167,13 +165,12 @@
 >
 > Bash shell example:
 >
-> cd \~
->
-> vi .bash\_profile
+     cd ~
+     vi .bash_profile
 >
 > insert the line below:
 >
-> alias apl=ansible-playbook
+     alias apl=ansible-playbook
 
 ## Ansible Configuration
 
@@ -182,15 +179,15 @@
 > In any shell, vi /etc/ansible/ansible.cfg and uncomment the follow
 > arguments and change the value.
 >
-> \[ssh\_connection\]
+     [ssh_connection]
 >
-> \# Enable SSH multiplexing to increase performance
+     # Enable SSH multiplexing to increase performance
 >
-> pipelining = True
+     pipelining = True
 >
-> retry\_files\_save\_path=\~/.retry\_files
+     retry_files_save_path=~/.retry_files
 >
-> retry\_files\_enabled=false
+     retry_files_enabled=false
 >
 > If you are annoyed by \*.retry files being created next to playbooks
 > which hinders filename tab completion, an environment variable

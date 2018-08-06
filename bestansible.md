@@ -337,25 +337,25 @@
         1.  at least one of the following directories below.
 
         2.  each directory used must contain a main.yml file that contains the
-    relevant content for that directory.
+            relevant content for that directory.
 
-        -   Tasks: The main list of tasks to be executed by the role.
-        -   Templates: Templates of files whose final state will be
-            rendered on the server using variable substitution and
-            additional logic.
-        -   Files: Static files that will be deployed to the server
-            as-is.
-        -   Vars: Variables that will be used to fill in abstractions in
-            tasks and templates.
-        -   Defaults: Default values for all variables used in the role.
-        -   Handlers: Actions that are triggered/notified by tasks.
-            Typically used for restarting services.
-        -   Meta: Machine-readable metadata about the role, its author,
-            license, compatibilities, and dependencies. If a role depends on
-            another role, it's declared here, and Ansible will pull in the
-            dependent role automatically.
-        -   README: Human-readable information about the role, how to
-            use it, and what variables it requires.
+            -   Tasks: The main list of tasks to be executed by the role.
+            -   Templates: Templates of files whose final state will be
+                rendered on the server using variable substitution and
+                additional logic.
+            -   Files: Static files that will be deployed to the server
+                as-is.
+            -   Vars: Variables that will be used to fill in abstractions in
+                tasks and templates.
+            -   Defaults: Default values for all variables used in the role.
+            -   Handlers: Actions that are triggered/notified by tasks.
+                Typically used for restarting services.
+            -   Meta: Machine-readable metadata about the role, its author,
+                license, compatibilities, and dependencies. If a role depends on
+                another role, it's declared here, and Ansible will pull in the
+                dependent role automatically.
+            -   README: Human-readable information about the role, how to
+                use it, and what variables it requires.
 
 > Using roles to run will simplify your playbooks. In this example
 > below, the tasks needed to configure the webserver, database, and

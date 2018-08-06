@@ -418,13 +418,13 @@
 >
 ##### You could go from this using playbook:
 
- \# site.yml
+     \# site.yml
 
- \-\--
+     \-\--
 
- \- hosts: all
+     \- hosts: all
 
- vars:
+     vars:
 >
 > remote\_user: user
 >

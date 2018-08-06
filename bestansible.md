@@ -388,7 +388,7 @@ Use roles to group related tasks
 > organizing things into roles let you reuse common configuration steps
 > between different types of servers.
 >
-##1.  Requirements for using role?
+1.  Requirements for using role?
 
 > Roles provide a standardized file-and-directory structure that lets
 > Ansible automatically load variables, tasks, handlers, and default
@@ -396,9 +396,9 @@ Use roles to group related tasks
 >
 > Per the Ansible roles documentation, a role must contain:
 
-##2.  at least one of the following directories below.
+2.  at least one of the following directories below.
 
-##3.  each directory used must contain a main.yml file that contains the
+3.  each directory used must contain a main.yml file that contains the
     relevant content for that directory.
 
     -   **Tasks:** The main list of tasks to be executed by the role.

@@ -419,151 +419,80 @@
 ##### You could go from this using playbook:
 
      \# site.yml
-
      \-\--
-
      \- hosts: all
-
      vars:
->
-> remote\_user: user
->
-> become: yes
->
-> tasks:
->
-> \- name: Install ntp
->
-> yum: name=ntp state=present
->
-> tags: ntp
->
-> \- name: Configure ntp file
->
-> template: src=ntp.conf.j2 dest=/etc/ntp.conf
->
-> tags: ntp
->
-> notify: restart ntp
->
-> \- name: Start the ntp service
->
-> service: name=ntpd state=started enabled=yes
->
-> tags: ntp
->
-> \- name: test to see if selinux is running
->
-> command: getenforce
->
-> register: sestatus
->
-> changed\_when: false
->
-> \- hosts: database
->
-> vars:
->
-> mysql\_port: 3306
->
-> dbname: somedb
->
-> dbuser: someuser
->
-> dbpass: somepass
->
-> remote\_user: user
->
-> become: yes
->
-> tasks:
->
-> \- name: Install Mysql package
->
-> yum: name={{ item }} state=installed
->
-> with\_items:
->
-> \- mysql-server
->
-> \- MySQL-python
->
-> \- libselinux-python
->
-> \- libsemanage-python
->
-> \- name: Configure SELinux to start mysql on any port
->
-> seboolean: name=mysql\_connect\_any state=true persistent=yes
->
-> when: sestatus.rc != 0
->
-> \- name: Create Mysql configuration file
->
-> template: src=my.cnf.j2 dest=/etc/my.cnf
->
-> notify:
->
-> \- restart mysql
->
-> \- name: Start Mysql Service
->
-> service: name=mysqld state=started enabled=yes
->
-> \- name: insert iptables rule
->
-> lineinfile: dest=/etc/sysconfig/iptables state=present regexp=\"{{
-> mysql\_port }}\" insertafter=\"\^:OUTPUT \" line=\"-A INPUT -p tcp
-> \--dport {{ mysql\_port }} -j ACCEPT\"
->
-> notify: restart iptables
->
-> \- name: Create Application Database
->
-> mysql\_db: name={{ dbname }} state=present
->
-> \- name: Create Application DB User
->
-> mysql\_user: name={{ dbuser }} password={{ dbpass }} priv=\*.\*:ALL
-> host=\'%\' state=present
->
-> Using roles:
->
-> \# site.yml
->
-> \-\--
->
-> \# This playbook deploys the whole application stack in this site.
->
-> \- name: apply common configuration to all nodes
->
-> hosts: all
->
-> remote\_user: user
->
-> roles:
->
-> \- common
->
-> \- name: configure and deploy the webservers and application code
->
-> hosts: webservers
->
-> remote\_user: user
->
-> roles:
->
-> \- web
->
-> \- name: deploy MySQL and configure the databases
->
-> hosts: dbservers
->
-> remote\_user: user
->
-> roles:
->
-> -db
+     remote\_user: user
+     become: yes
+     tasks:
+     \- name: Install ntp
+     yum: name=ntp state=present
+     tags: ntp
+     \- name: Configure ntp file
+     template: src=ntp.conf.j2 dest=/etc/ntp.conf
+     tags: ntp
+     notify: restart ntp
+     \- name: Start the ntp service
+     service: name=ntpd state=started enabled=yes
+     tags: ntp
+     \- name: test to see if selinux is running
+     command: getenforce
+     register: sestatus
+     changed\_when: false
+     \- hosts: database
+     vars:
+     mysql\_port: 3306
+     dbname: somedb
+     dbuser: someuser
+     dbpass: somepass
+     remote\_user: user
+     become: yes
+     tasks:
+     \- name: Install Mysql package
+     yum: name={{ item }} state=installed
+     with\_items:
+     \- mysql-server
+     \- MySQL-python
+     \- libselinux-python
+     \- libsemanage-python
+     \- name: Configure SELinux to start mysql on any port
+     seboolean: name=mysql\_connect\_any state=true persistent=yes
+     when: sestatus.rc != 0
+     \- name: Create Mysql configuration file
+     template: src=my.cnf.j2 dest=/etc/my.cnf
+     notify:
+     \- restart mysql
+     \- name: Start Mysql Service
+     service: name=mysqld state=started enabled=yes
+     \- name: insert iptables rule
+     lineinfile: dest=/etc/sysconfig/iptables state=present regexp=\"{{
+     mysql\_port }}\" insertafter=\"\^:OUTPUT \" line=\"-A INPUT -p tcp
+     \--dport {{ mysql\_port }} -j ACCEPT\"
+     notify: restart iptables
+     \- name: Create Application Database
+     mysql\_db: name={{ dbname }} state=present
+     \- name: Create Application DB User
+     mysql\_user: name={{ dbuser }} password={{ dbpass }} priv=\*.\*:ALL
+     host=\'%\' state=present
+#####     Using roles:
+     \# site.yml
+     \-\--
+     \# This playbook deploys the whole application stack in this site.
+     \- name: apply common configuration to all nodes
+     hosts: all
+     remote\_user: user
+     roles:
+     \- common
+     \- name: configure and deploy the webservers and application code
+     hosts: webservers
+     remote\_user: user
+     roles:
+     \- web
+     \- name: deploy MySQL and configure the databases
+     hosts: dbservers
+     remote\_user: user
+     roles:
+     -db
 
 Directory Layout
 ----------------

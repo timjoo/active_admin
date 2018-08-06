@@ -58,10 +58,9 @@
 >
 >	3.  ssh enabled
 
-Basic Setup and Configuration
-==============================
+# Basic Setup and Configuration
 
-Installing Ansible
+## Installing Ansible
 ------------------
 
 > To begin exploring Ansible as a means of managing our various servers,
@@ -79,8 +78,7 @@ Installing Ansible
 > We now have all of the software required to administer our servers
 > through Ansible.
 
-Configuring Ansible Hosts
--------------------------
+## Configuring Ansible Hosts
 
 > Ansible keeps track of all of the servers that it knows about through
 > a \"hosts\" file. We need to set up this file first before we can
@@ -99,8 +97,7 @@ Configuring Ansible Hosts
 > different ways. The syntax we are going to use though looks something
 > like this:
 
-Set up ssh connectivity to the servers
---------------------------------------
+## Set up ssh connectivity to the servers
 
 > For this example, I\'ll assume you have servers with the
 > hostnames host1.dev and host2.dev. Your /etc/ansible/hosts file would
@@ -143,8 +140,7 @@ Set up ssh connectivity to the servers
 >
 > \"ping\": \"pong\".
 
-Version Control:
-----------------
+## Version Control:
 
 > It should be clear that Ansible uses text files and therefore
 > well-established version control will save a lot of time and headache.
@@ -153,8 +149,7 @@ Version Control:
 > this section will be updated as I get my access to the dicelab and
 > understand the environment )
 
-Setup and Connection to AWS
----------------------------
+## Setup and Connection to AWS
 
 > There are number of modules for controlling AWS. To control AWS
 > environment, ansible requires an additional python module, boto. Boto
@@ -165,8 +160,7 @@ Setup and Connection to AWS
 > (Update to this section will be made once we have our environment in
 > AWS.)
 
-Basic OS configuration
-----------------------
+## Basic OS configuration
 
 > For ease of the user from typing ansible-playbook every time to
 > execute ansible, it is recommended that you add an alias for
@@ -182,8 +176,7 @@ Basic OS configuration
 >
 > alias apl=ansible-playbook
 
-Ansible Configuration
----------------------
+## Ansible Configuration
 
 > Recommend making the following settings for ansible.
 >
@@ -206,11 +199,9 @@ Ansible Configuration
 > can disable it from creating retry files by
 > RETRY\_FILES\_ENABLED=false.
 
-Best Practices:
-===============
+# Best Practices:
 
-Comments
---------
+## Comments
 
 > You should start every script with some comments explaining the
 > purpose of the script. Comments will make the intent of the script
@@ -218,8 +209,8 @@ Comments
 >
 > "\#" is used to indicate a comment.
 >
-Single Quotes
--------------
+
+## Single Quotes
 
 > Preference by a lot of ansible users are to use single quotes over
 > double quotes. The only time you should use double quotes is when they
@@ -227,14 +218,13 @@ Single Quotes
 > your string requires escaping characters (e.g. using \"\\n\" to
 > represent a newline).
 >
-End of Files
-------------
+
+## End of Files
 
 > You should end your ansible scripts with a newline to avoid any prompt
 > misalignment when printing files in a terminal.
 
-Spacing
--------
+## Spacing
 
 > When indenting, you should use 2 spaces to represent sub-maps.You
 > should have blank lines between two host blocks, between two task
@@ -242,8 +232,8 @@ Spacing
 > looking and easier to read code and also python is very finicky with
 > spacing.
 >
-"Name" Your Plays and Tasks
----------------------------
+
+## "Name" Your Plays and Tasks
 
 > Just as providing a good comment to describe the purpose of the script
 > is important, a good descriptive "name" can make a user of the
@@ -341,8 +331,8 @@ Spacing
 > A good "name" can reduce the confusion and aid the usage of
 > the \--list-tasks switch in ansible-playbook.
 >
-Meaningful Variable names
--------------------------
+
+## Meaningful Variable names
 
 > To help to clarify, variable names should be meaningful. But ansible
 > variable names have some restrictions in Ansible:
@@ -360,8 +350,8 @@ Meaningful Variable names
 >
 > tomcat\_port: 8080
 >
-Use modules before run commands
--------------------------------
+ 
+## Use modules before run commands
 
 > Run commands are what we collectively call
 > the command, shell, raw and script modules that enable users to do
@@ -374,8 +364,8 @@ Use modules before run commands
 > consider is that these run commands have little logic to them and no
 > concept of desired state like a typical Ansible module.
 >
-Use roles to group related tasks
---------------------------------
+
+## Use roles to group related tasks
 
 > In Ansible, roles allow you to group related tasks and all their
 > variables and dependencies into a single, self-contained, portable
@@ -384,7 +374,7 @@ Use roles to group related tasks
 > organizing things into roles let you reuse common configuration steps
 > between different types of servers.
 >
-1.  Requirements for using role?
+### 1.  Requirements for using role?
 
 > Roles provide a standardized file-and-directory structure that lets
 > Ansible automatically load variables, tasks, handlers, and default
@@ -392,9 +382,9 @@ Use roles to group related tasks
 >
 > Per the Ansible roles documentation, a role must contain:
 
-2.  at least one of the following directories below.
+### 2.  at least one of the following directories below.
 
-3.  each directory used must contain a main.yml file that contains the
+### 3.  each directory used must contain a main.yml file that contains the
     relevant content for that directory.
 
     -   **Tasks:** The main list of tasks to be executed by the role.

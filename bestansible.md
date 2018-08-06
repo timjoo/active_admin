@@ -1,5 +1,4 @@
-Introduction:
-=============
+H1 Introduction:
 
 Purpose and scope:
 ------------------

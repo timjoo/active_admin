@@ -243,43 +243,29 @@
 ##### YAML
      - hosts: web
      tasks:
->
-      \- yum:
->
+      - yum:
       name: httpd
->
       state: latest
->
-      \- service:
->
+      - service:
       name: httpd
->
       state: started
->
       enabled: yes
+      PLAY [web]
+      ******************************************************
+      TASK [setup]
+      ***************************************************
+      ok: [web1]
+      TASK [yum]
+      ******************************************************
+      ok: [web1]
+      TASK [service]
+      *************************************************
+      ok: [web1]
 >
-      PLAY \[web\]
-      \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
->
-      TASK \[setup\]
-      \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
->
-      ok: \[web1\]
->
-      TASK \[yum\]
-> \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
->
-      ok: \[web1\]
->
-      TASK \[service\]
-> \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
->
-      ok: \[web1\]
->
-#####  The play above was successful, but it is difficult to understand the
- actions of each tasks. You can guess what each of the tasks were or
- the purpose of the play, but a good descriptive "name" can make the
- task much clearer.
+>  The play above was successful, but it is difficult to understand the
+> actions of each tasks. You can guess what each of the tasks were or
+> the purpose of the play, but a good descriptive "name" can make the
+> task much clearer.
 >
 #####  YAML
      - hosts: web

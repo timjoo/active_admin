@@ -381,9 +381,9 @@
 >
 > Per the Ansible roles documentation, a role must contain:
 
-##### 1.  at least one of the following directories below.
+#####      1.  at least one of the following directories below.
 
-##### 2.  each directory used must contain a main.yml file that contains the
+#####      2.  each directory used must contain a main.yml file that contains the
     relevant content for that directory.
 
     -   **Tasks:** The main list of tasks to be executed by the role.

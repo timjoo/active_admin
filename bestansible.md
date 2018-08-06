@@ -237,6 +237,7 @@
           name: httpd
           state: started
           enabled: yes
+
       PLAY [web]
       ******************************************************
       TASK [setup]
@@ -267,6 +268,7 @@
            name: httpd
            state: started
            enabled: yes
+
      PLAY [install and starts apache]
      ***********************************
     
